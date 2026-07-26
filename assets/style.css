@@ -1,0 +1,435 @@
+/* ══════════════════════════════════════════════════════════════
+   VIDEO QUEST AI — Dark Pixel RPG Theme
+   Palette, type, and every component are locked to the design
+   brief. Do not introduce SaaS gradients, glassmorphism, or
+   Material patterns here — pixel-RPG only.
+   ══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=VT323&display=swap');
+
+:root {
+    --bg:        #121218;
+    --sidebar:   #1B1F2B;
+    --card:      #23283A;
+    --border:    #5D4A82;
+    --purple:    #9A7DFF;
+    --orange:    #FFB347;
+    --pink:      #FF87B5;
+    --mint:      #1c4535;
+    --text:      #F5F5F5;
+
+    --pixel: 4px; /* base pixel unit for stepped corners / shadows */
+}
+
+/* ── Global reset ─────────────────────────────────────────── */
+html, body, [class*="css"] {
+    font-family: 'VT323', monospace !important;
+    font-size: 19px;
+    background-color: var(--bg) !important;
+    color: var(--text) !important;
+    image-rendering: pixelated;
+}
+
+.stApp {
+    background: var(--bg) !important;
+    background-image:
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px);
+}
+
+* { scrollbar-width: thin; scrollbar-color: var(--purple) var(--sidebar); }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--sidebar); }
+::-webkit-scrollbar-thumb { background: var(--border); border: 2px solid var(--sidebar); }
+::-webkit-scrollbar-thumb:hover { background: var(--purple); }
+
+/* ── Headings / pixel type scale ──────────────────────────── */
+h1, h2, h3, h4, h5, h6,
+.pixel-heading {
+    font-family: 'Pixelify Sans', sans-serif !important;
+    color: var(--text) !important;
+    letter-spacing: 0.02em;
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.5);
+}
+
+/* ── Pixel border mixin: stepped "8-bit" corners via clip-path ── */
+.pixel-frame {
+    position: relative;
+    clip-path: polygon(
+        0 8px, 8px 8px, 8px 0,
+        calc(100% - 8px) 0, calc(100% - 8px) 8px, 100% 8px,
+        100% calc(100% - 8px), calc(100% - 8px) calc(100% - 8px), calc(100% - 8px) 100%,
+        8px 100%, 8px calc(100% - 8px), 0 calc(100% - 8px)
+    );
+    background: var(--card);
+    border: 3px solid var(--border);
+}
+
+/* ── Hero banner ───────────────────────────────────────────── */
+.hero-banner {
+    text-align: center;
+    padding: 2.5rem 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero-title {
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--orange);
+    text-shadow: 3px 3px 0 #000, 0 0 18px rgba(255,179,71,0.35);
+    margin: 0;
+    letter-spacing: 0.05em;
+}
+
+.hero-sub {
+    font-family: 'VT323', monospace;
+    font-size: 1.15rem;
+    color: var(--mint);
+    margin-top: 0.4rem;
+    letter-spacing: 0.08em;
+}
+
+.hero-cat {
+    font-size: 3rem;
+    margin: 0.75rem 0;
+    animation: floaty 2.4s ease-in-out infinite;
+}
+
+@keyframes floaty {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+}
+
+/* ── Sidebar (RPG menu) ───────────────────────────────────── */
+[data-testid="stSidebar"] {
+    background: var(--sidebar) !important;
+    border-right: 4px solid var(--border) !important;
+}
+[data-testid="stSidebar"] * { color: var(--text) !important; }
+[data-testid="stSidebar"] hr { border-top: 2px dashed var(--border) !important; opacity: 0.7; }
+
+.sidebar-header {
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 1rem;
+    color: var(--purple);
+    text-align: center;
+    padding: 0.6rem 0;
+    letter-spacing: 0.06em;
+}
+
+.level-badge {
+    text-align: center;
+    font-family: 'VT323', monospace;
+    color: var(--mint);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.nav-rule {
+    text-align: center;
+    color: var(--border);
+    letter-spacing: 4px;
+    font-size: 0.8rem;
+    margin: 0.4rem 0 0.9rem;
+}
+
+/* ── Quest / Card panels ──────────────────────────────────── */
+.quest-card {
+    background: var(--card);
+    border: 3px solid var(--border);
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1rem;
+    clip-path: polygon(
+        0 8px, 8px 8px, 8px 0,
+        calc(100% - 8px) 0, calc(100% - 8px) 8px, 100% 8px,
+        100% calc(100% - 8px), calc(100% - 8px) calc(100% - 8px), calc(100% - 8px) 100%,
+        8px 100%, 8px calc(100% - 8px), 0 calc(100% - 8px)
+    );
+    position: relative;
+}
+
+.quest-card-title {
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--orange);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quest-card-content {
+    font-family: 'VT323', monospace;
+    font-size: 1.15rem;
+    line-height: 1.55;
+    color: var(--text);
+    white-space: pre-wrap;
+}
+
+/* ── Badges ────────────────────────────────────────────────── */
+.pixel-badge {
+    display: inline-block;
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border: 2px solid;
+    margin-right: 0.4rem;
+}
+.badge-purple { color: var(--purple); border-color: var(--purple); background: rgba(154,125,255,0.12); }
+.badge-orange { color: var(--orange); border-color: var(--orange); background: rgba(255,179,71,0.12); }
+.badge-pink   { color: var(--pink);   border-color: var(--pink);   background: rgba(255,135,181,0.12); }
+.badge-mint   { color: var(--mint);   border-color: var(--mint);   background: rgba(126,252,203,0.12); }
+
+/* ── 8-bit health / XP bars ───────────────────────────────── */
+.pixel-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0.35rem 0;
+}
+.pixel-bar-label {
+    font-family: 'VT323', monospace;
+    font-size: 1rem;
+    color: var(--text);
+    min-width: 108px;
+}
+.pixel-bar-track {
+    flex: 1;
+    height: 16px;
+    background: #0c0c11;
+    border: 2px solid var(--border);
+    padding: 2px;
+    display: flex;
+    gap: 2px;
+}
+.pixel-bar-seg {
+    flex: 1;
+    background: #1a1a24;
+}
+.pixel-bar-seg.filled { background: var(--seg-color, var(--mint)); }
+
+/* ── Quest loading system ─────────────────────────────────── */
+.quest-log-title {
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--orange);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+}
+.quest-line {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.4rem;
+    background: var(--card);
+    border: 2px solid var(--border);
+    font-family: 'VT323', monospace;
+    font-size: 1.05rem;
+}
+.quest-line.q-active { border-color: var(--orange); box-shadow: 0 0 10px rgba(255,179,71,0.35); }
+.quest-line.q-done    { border-color: var(--mint); opacity: 0.75; }
+.quest-line.q-pending { opacity: 0.4; }
+
+.quest-icon { font-size: 1.1rem; width: 1.4rem; text-align: center; }
+.quest-name { flex: 1; }
+.quest-tag  { font-size: 0.7rem; font-family: 'Pixelify Sans', sans-serif; letter-spacing: 0.06em; }
+.q-active .quest-tag { color: var(--orange); }
+.q-done .quest-tag    { color: var(--mint); }
+.q-pending .quest-tag { color: var(--border); }
+
+/* ── Milo mascot (fixed, bottom-right) ────────────────────── */
+.milo-wrap {
+    position: fixed;
+    bottom: 18px;
+    right: 18px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    pointer-events: none;
+}
+.milo-bubble {
+    font-family: 'VT323', monospace;
+    font-size: 1rem;
+    color: var(--text);
+    background: var(--card);
+    border: 3px solid var(--purple);
+    padding: 0.5rem 0.8rem;
+    max-width: 200px;
+    margin-bottom: 0.4rem;
+    clip-path: polygon(0 6px,6px 6px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 6px,100% 6px,100% 100%,6px 100%,6px calc(100% - 6px),0 calc(100% - 6px));
+}
+.milo-sprite {
+    font-size: 2.6rem;
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    animation: milo-idle 1.8s ease-in-out infinite;
+    filter: drop-shadow(0 4px 0 rgba(0,0,0,0.4));
+}
+@keyframes milo-idle {
+    0%, 100% { transform: translateY(0) scaleX(1); }
+    50%      { transform: translateY(-6px) scaleX(1); }
+}
+.milo-sprite.thinking { animation: milo-think 1s steps(2) infinite; }
+@keyframes milo-think { 0%,100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+
+/* ── Dialogue / chat (Undertale-style) ────────────────────── */
+.dialogue-box {
+    background: var(--card);
+    border: 3px solid var(--border);
+    padding: 1rem;
+    max-height: 420px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    clip-path: polygon(0 8px,8px 8px,8px 0,calc(100% - 8px) 0,calc(100% - 8px) 8px,100% 8px,100% calc(100% - 8px),calc(100% - 8px) calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,8px calc(100% - 8px),0 calc(100% - 8px));
+}
+.d-msg { margin-bottom: 0.85rem; display: flex; flex-direction: column; gap: 0.15rem; }
+.d-label {
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+.d-label.you  { color: var(--purple); align-self: flex-end; }
+.d-label.milo { color: var(--orange); }
+.d-bubble {
+    font-family: 'VT323', monospace;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    padding: 0.55rem 0.85rem;
+    max-width: 88%;
+    border: 2px solid;
+}
+.d-bubble.you  { align-self: flex-end; border-color: var(--purple); background: rgba(154,125,255,0.1); }
+.d-bubble.milo { align-self: flex-start; border-color: var(--orange); background: rgba(255,179,71,0.1); }
+
+/* ── Transcript scroll (ancient scroll) ───────────────────── */
+.scroll-box {
+    background: #0e0e14;
+    border: 2px dashed var(--border);
+    padding: 1rem 1.2rem;
+    font-family: 'VT323', monospace;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--mint);
+    max-height: 320px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* ── Status bar (bottom HUD) ───────────────────────────────── */
+.status-hud {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.6rem;
+    flex-wrap: wrap;
+    background: var(--sidebar);
+    border-top: 3px solid var(--border);
+    padding: 0.6rem 1rem;
+    margin-top: 2rem;
+    font-family: 'VT323', monospace;
+    font-size: 1.05rem;
+}
+.status-hud span.hud-item { color: var(--text); }
+.status-hud .hud-hp   { color: var(--pink); }
+.status-hud .hud-xp   { color: var(--purple); }
+.status-hud .hud-gem  { color: var(--mint); }
+
+/* ── Inputs & buttons — pixel-fied Streamlit overrides ────── */
+.stTextInput > div > div > input,
+.stSelectbox > div > div,
+.stTextArea textarea {
+    background: #0e0e14 !important;
+    border: 2px solid var(--border) !important;
+    border-radius: 0 !important;
+    color: var(--text) !important;
+    font-family: 'VT323', monospace !important;
+    font-size: 1.05rem !important;
+}
+.stTextInput > div > div > input:focus {
+    border-color: var(--purple) !important;
+    box-shadow: 0 0 0 2px rgba(154,125,255,0.3) !important;
+}
+
+.stButton > button {
+    background: var(--purple) !important;
+    color: #121218 !important;
+    border: 3px solid #0e0e14 !important;
+    border-radius: 0 !important;
+    font-family: 'Pixelify Sans', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 0.06em !important;
+    padding: 0.55rem 1.3rem !important;
+    text-transform: uppercase !important;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.5) !important;
+    transition: transform 0.08s, box-shadow 0.08s !important;
+}
+.stButton > button:hover {
+    transform: translate(-2px, -2px) !important;
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.5) !important;
+    background: var(--orange) !important;
+}
+.stButton > button:active {
+    transform: translate(2px, 2px) !important;
+    box-shadow: 1px 1px 0 rgba(0,0,0,0.5) !important;
+}
+.stButton > button[kind="secondary"] {
+    background: var(--card) !important;
+    color: var(--text) !important;
+    border-color: var(--border) !important;
+}
+
+/* Expander */
+.streamlit-expanderHeader, [data-testid="stExpander"] summary {
+    font-family: 'Pixelify Sans', sans-serif !important;
+    color: var(--orange) !important;
+    background: var(--card) !important;
+    border: 2px solid var(--border) !important;
+}
+[data-testid="stExpander"] { border: none !important; }
+
+/* Alerts */
+[data-testid="stAlert"] {
+    background: var(--card) !important;
+    border: 2px solid var(--border) !important;
+    border-radius: 0 !important;
+    font-family: 'VT323', monospace !important;
+    font-size: 1.05rem !important;
+    color: var(--text) !important;
+}
+
+label { color: var(--mint) !important; font-family: 'VT323', monospace !important; font-size: 1rem !important; }
+hr { border: none !important; border-top: 2px dashed var(--border) !important; margin: 1.3rem 0 !important; }
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 3.5rem 2rem;
+}
+.empty-state .icon { font-size: 3.2rem; margin-bottom: 0.8rem; }
+.empty-state .title {
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 1.2rem;
+    color: var(--orange);
+    margin-bottom: 0.5rem;
+}
+.empty-state .desc {
+    font-family: 'VT323', monospace;
+    font-size: 1.1rem;
+    color: var(--text);
+    max-width: 420px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
